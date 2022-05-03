@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!-- 상단 꾸미기 -->
+<div class="blue_sec">
+    <div class="container">
+        <div style="font-size:4rem;">
+        <div class="top_info_lead">SECURITY FACTORIAL<br>
+        <span class="top_info_lead">Online Judge System</span>
+    </div>
+    </div>
+</div>
+</div>
+<!-- page content -->
+<div class="white_sec">
+    <div class="container" class="board_uploads_my_box_title">
+<div class="board_uploads_title">문제등록</div><br>
+        <div class="board_uploads_sub">양식에 맞게 작성하여 자신의 문제를 등록하세요. </div>
+        </div>
+</div>
+
+<!-- 문제 등록 박스 -->
+<div class="board_uploads_my_box">
+              <div class="board_uploads_container">
+    <form method="post" class="">
+        {% csrf_token %}
+        <!-- 오류표시 Start -->
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+                {% if field.errors %}
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+                {% endif %}
+            {% endfor %}
+            </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+
+        <div>
+            <label class="board_uploads_sub" style="font-weight:bold" for="title">제목</label>
+            <input type="text" class="board_uploads_form-control"  name="title" id="title"
+                   value="{{ form.title.value|default_if_none:'' }}">
+        </div>
+
+        <div>
+            <label class="board_uploads_sub" style="font-weight:bold" for="content">내용</label>
+            <textarea class="board_uploads_form-control" name="content"
+                      id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
+
+        <button type="submit" class="bg_btn_style">저장하기</button>
+        </form>
+</div>
+</div>
+<br>
+<br>
+<br>
+
+{% endblock %}
+

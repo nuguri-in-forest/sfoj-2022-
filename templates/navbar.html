@@ -1,0 +1,24 @@
+{% load static %}
+<!-- Navigation-->
+    <nav class="navbar">
+        <div class="navbar_logo">
+            {% load static %}
+            <a href="/"><img style="width:300px;height:150px;"src="{% static 'assets/img/sfoj_logo.jpg' %}"></a>
+        </div>
+        <ul class="navbar_menu">
+            <li>
+                <a class="navbar_menu" href="{% url 'sfoj_system:index' %}">home</a>
+                <a class="navbar_menu" href="https://sites.google.com/d/1FmwHjb7_15XeQMd3oYBnXJvYB9_HtsCU/p/1MujXOH0Oi-tMGNoON-CtXv76fAxJHLHV/edit">about</a>
+                <a class="navbar_menu" href="{% url 'common:signup' %}">sign up</a>
+                <!-- 로그인 세션 활용 -->
+                {% if user.is_authenticated %}
+                <span class="navbar_menu_lgnout" style="font-weight:bold">({{ user.username }})님</span> <a class="navbar_menu_lgnout" href="{%url 'common:logout' %}">logout</a>
+                {% else %}
+                <a class="navbar_menu" href="{%url 'common:login' %}">login</a>
+                {% endif %}
+            </li>
+        </ul>
+        <a href="#" class="navbar_toggle">
+            <i></i>
+        </a>
+    </nav>

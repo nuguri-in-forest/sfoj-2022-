@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- 상단 꾸미기 -->
+<!Doctype html>
+<div class="blue_sec">
+    <div class="container">
+        <div style="font-size:4rem;">
+            <div class="top_info_lead">Sign up</div>
+        </div>
+    <div>
+        <div>
+            <span class="top_info_sub">이미 회원이신가요? <a class="signup_lgn" style="font-weight:bold" href="{% url 'common:login' %}">로그인</a></span>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- 회원가입 박스 -->
+<div class="white_sec">
+<div class="container">
+    <div class="signup_box">
+    <form method="post" action="{% url 'common:signup' %}">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+        <div class="textbox">
+            <label for="username">아이디</label>
+            <input type="text" name="username" id="username"
+                   value="{{ form.username.value|default_if_none:'' }}">
+            <label for="password1">비밀번호</label>
+            <input type="password" name="password1" id="password1"
+                   value="{{ form.password.value|default_if_none:'' }}">
+            <label for="password1">비밀번호 확인</label>
+            <input type="password" name="password2" id="password2"
+                   value="{{ form.password.value|default_if_none:'' }}">
+
+            <label for="email">이메일</label>
+            <input type="text" name="email" id="email"
+                   value="{{ form.email.value|default_if_none:'' }}">
+        </div>
+
+        <button type="submit" class="signup_btn">가입하기</button>
+    </form>
+        <br>
+        <div class="sign_and_find">
+        <a href="{% url 'common:login' %}">로그인</a>
+            <span>|</span>
+        <a href="#find_id">아이디찾기</a>
+            <span>|</span>
+        <a href="#find_pw">비밀번호찾기</a>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

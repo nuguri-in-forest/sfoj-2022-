@@ -1,0 +1,19 @@
+# problem 1000 - config
+TC_CNT=11
+MEMORY_LIMIT = 1000
+TIME_LIMIT = 1000
+
+==C==
+MEMORY_LIMIT += 0
+TIME_LIMIT += 0
+==CXX==
+
+==JAVA==
+
+==PYTHON==
+
+==CLANG==
+
+==CLANG++==
+
+==PHP==

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Online Judge</title>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/vs2015.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+
+<style type="text/css">
+    .page{
+        overflow: auto;
+    }
+    .section1{
+        margin: 20px;
+        height: 400px;
+        width: 800px;
+        border: 3px solid #000000;
+    }
+    .code-box {
+      float: left;
+      width:300px;
+      margin:20px;
+    }
+    .code-box textarea {
+      width:300px;
+      height:200px;
+    }
+    .highlight-box {
+      float: right;
+      width:400px;
+      height:400px;
+      margin:20px;
+    }
+    
+    
+</style>
+</head>
+<body onload="load()">
+    <div id="container" class="page">
+        <h1 style="margin-left: 20px;">
+             Submit Testing
+        </h1>
+        <div style="margin: 20px;">
+            Write a program that takes two numbers and prints their sum.
+        </div>
+        <div class="section1">
+            <form class="code-box" action="{{ url_for('submit') }}" method="post">
+                <p>
+                    <input type="radio" id="LANG_C" name="LANG" value="C" required>
+                    <label for="LANG_C">C</label>
+                </p>
+                <p>
+                    <input type="radio" id="LANG_CXX" name="LANG" value="CXX" required>
+                    <label for="LANG_CXX">CXX</label>
+                </p>
+                <textarea  name="source_code"></textarea>
+                <input type="hidden" value="1000" name="problem_id">
+                <input type="submit" value="submit">
+            </form>
+        
+            {% if submit %}
+            <div class="highlight-box">Code : <pre><code style="width:300px;height:300px" class="{{ code_language }}">{{ code }}</code></pre></div>
+        </div>
+
+        <div style="margin: 20px">
+            <table>
+                <thead><tr>Result :</tr></thead>
+                <tbody>
+                 {% for key, value in result.items() %}
+                 <tr>
+                    {% if value=="ACCEPTED" %}
+                        <td>TestCase{{ key }} :<span style="color:green"> {{ value }}</span></td>
+                    {% else %}
+                        <td>TestCase{{ key }} :<span style="color:red"> {{ value }}</span></td>
+                    {% endif %}
+                </tr>
+                 {% endfor %}
+                 </tbody>
+            </table>
+        </div>
+        {% endif %}
+    
+        
+    </div>
+</body>
+</html>
